@@ -1,4 +1,4 @@
-Hello I am Himanshu Tamoli This is my E Commerce Sanskar Cart Backend Code File 
+Hello I am Himanshu Tamoli This is my E Commerce Sanskar Cart Backend Code Files and here are the key features and technical details of this site 
 
 🔥 Features :
 - Basic E-commerce Features- Product lists, Product Details, Cart, Checkout 
