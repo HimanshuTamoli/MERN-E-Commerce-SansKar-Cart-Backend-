@@ -5,7 +5,7 @@ const {Schema} = mongoose;
 const productSchema = new Schema({
     title: { type : String, required: true, unique: true},
     description: { type : String, required: true},
-    price: { type: Number, min:[1, 'wrong min price'], max:[10000, 'wrong max price']},
+    price: { type: Number, min:[1, 'wrong min price']},
     discountPercentage: { type: Number, min:[1, 'wrong min discount'], max:[99, 'wrong max discount']},
     rating: { type: Number, min:[0, 'wrong min rating'], max:[5, 'wrong max price'], default:0},
     stock: { type: Number, min:[0, 'wrong min stock'], default:0},
@@ -25,10 +25,13 @@ virtualId.get(function(){
     return this._id;
 })
 // we can't sort using the virtual fields. better to make this field at time of doc creation
-// const virtualDiscountPrice =  productSchema.virtual('discountPrice');
-// virtualDiscountPrice.get(function(){
-//     return Math.round(this.price*(1-this.discountPercentage/100));
-// })
+// Rename the virtual property
+// const virtualDiscountPrice = productSchema.virtual('calculatedDiscountPrice');
+// virtualDiscountPrice.get(function () {
+//     return Math.round(this.price * (1 - this.discountPercentage / 100));
+// });
+
+
 productSchema.set('toJSON',{
     virtuals: true,
     versionKey: false,
