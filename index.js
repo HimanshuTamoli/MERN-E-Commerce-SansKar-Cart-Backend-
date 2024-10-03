@@ -115,7 +115,7 @@ passport.use(
   ) {
     // by default passport uses username
     console.log({ email, password });
-    console.log({ email, password });
+ 
     try {
       const user = await User.findOne({ email: email });
       console.log(email, password, user);
