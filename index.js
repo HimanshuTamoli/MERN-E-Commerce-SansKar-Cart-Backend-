@@ -24,7 +24,7 @@ const { isAuth, sanitizeUser, cookieExtractor } = require('./services/common');
 const path = require('path');
 const { Order } = require('./model/Order');
 const { env } = require('process');
-  
+
 // Webhook
 
 const endpointSecret = process.env.ENDPOINT_SECRET;
@@ -84,11 +84,11 @@ server.use(
   })
 );
 server.use(passport.authenticate('session'));
-server.use(
-  cors({
-    exposedHeaders: ['X-Total-Count'],
-  })
-);
+server.use(cors({
+  origin: "https://mern-e-commerce-sans-kar-cart-backend.vercel.app", // Allow your frontend URL
+  exposedHeaders: ['X-Total-Count'],
+}));
+
 server.use(express.json()); // to parse req.body
 
 server.use('/products', isAuth(), productsRouter.router);
