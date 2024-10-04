@@ -187,7 +187,7 @@ server.post('/create-payment-intent', async (req, res) => {
   try {
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: totalAmount * 100, // for decimal compensation
+      amount: totalAmount * 100, // Stripe expects the amount in cents
       currency: 'inr',
       automatic_payment_methods: {
         enabled: true,
@@ -196,10 +196,12 @@ server.post('/create-payment-intent', async (req, res) => {
         orderId,
       },
     });
-
+    
+    console.log("Payment Intent Created:", paymentIntent); // Add this line to log the payment intent
     res.send({
       clientSecret: paymentIntent.client_secret,
     });
+    
   } catch (error) {
     console.error('Error creating PaymentIntent:', error);
     res.status(500).send({ error: error.message });
